@@ -1,0 +1,27 @@
+.sunsweets-spin-icon-load{
+    animation: ani-sunsweets-spin 1s linear infinite;
+}
+@keyframes ani-sunsweets-spin {
+    from { transform: rotate(0deg);}
+    50%  { transform: rotate(180deg);}
+    to   { transform: rotate(360deg);}
+}
+
+.sweet-home__content{
+    position: absolute;
+    left: 180px;
+    top:48px;
+    right:0;
+    bottom:0;
+    background: #f5f7f9;
+    /*height: 100vh;*/
+    padding: 20px 50px;
+    overflow-x:hidden;
+}
+.sweet-content__module{
+    margin-top:10px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    height: calc(100% - 32px);
+}
