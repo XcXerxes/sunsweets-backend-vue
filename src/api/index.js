@@ -14,15 +14,15 @@ const headers = {
 
 // 解析参数
 
-const parseParams = (method, params) =>{
-    if(!method){
+const parseParams = (method, params) => {
+    if (!method) {
         return {
             headers
         }
     }
     return {
         headers,
-        method: 'POST',
+        method,
         body: JSON.stringify(params)
     }
 }
@@ -50,10 +50,10 @@ export default {
         })
     },
     // 获取轮播图列表
-    getCarouselList({limit,currentPage,sort}){debugger
+    getCarouselList({ limit, currentPage, sort }) {
         return new Promise((resolve, reject) => {
-            const sort = sort ? `&sort=${sort}` :''
-            fetch(`${clientConfig.api}bankend/carousel/list?limit=${limit}&currentPage=${currentPage}${sort}`,parseParams())
+            const sort = sort ? `&sort=${sort}` : ''
+            fetch(`${clientConfig.api}bankend/carousel/list?limit=${limit}&currentPage=${currentPage}${sort}`, parseParams())
                 .then(checkStatus)
                 .then(_parseResponse)
                 .then(data => {
@@ -62,6 +62,19 @@ export default {
                     reject(err)
                 })
         })
+    },
+    // 添加轮播图
+    createCarousel(params) {
+        return new Promise((resolve, reject) => {
+            fetch(`${clientConfig.api}bankend/carousel/add`, parseParams('POST', params))
+                .then(checkStatus)
+                .then(_parseResponse)
+                .then(data => {debugger
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
     }
-    
+
 }

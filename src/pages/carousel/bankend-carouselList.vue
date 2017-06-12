@@ -6,7 +6,10 @@
              <div class="carousel-pagation">
                 <Button type="primary" @click="addCarousel" >添加轮播图</Button>
                 <Page :total="total" :page-size="limit" :current="currentPage" 
-                :page-size-opts="[5, 10, 15]" show-elevator show-elevator show-sizer show-total />
+                :page-size-opts="[5, 10, 15]" show-elevator show-elevator show-sizer show-total 
+                @on-change="pageChange"
+                @on-page-size-change="pageSizeChange"
+                />
              </div>
         </div>
     </section>
@@ -30,6 +33,16 @@
         methods:{
             addCarousel(){
                 this.$router.push('/carousel/add')
+            },
+            // 页码改变时
+            pageChange(currentPage){
+                this.currentPage = currentPage
+                this.fetchDataList({limit: this.limit,currentPage})
+            },
+            // 条数改变时
+            pageSizeChange(limit){
+                this.limit = limit
+                this.fetchDataList({limit,currentPage: this.currentPage})
             },
             // 获取数据
             fetchDataList({limit,currentPage,sort}){debugger

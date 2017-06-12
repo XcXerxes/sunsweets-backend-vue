@@ -5,6 +5,7 @@
 
 <script>
 import moment from 'moment'
+import clientConfig from '@/api/client-config'
 export default {
     props: ['data'],
     data() {
@@ -18,7 +19,7 @@ export default {
                         debugger
                         return h('img', {
                             attrs: {
-                                src: params.row.img
+                                src: params.row.img.startsWith('http')? params.row.img :`${clientConfig.originalUrl}${params.row.img}`
                             },
                             style: {
                                 width: '80px',
