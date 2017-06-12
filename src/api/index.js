@@ -2,14 +2,31 @@ import clientConfig from './client-config'
 import { getCookie, checkStatus } from '../utils'
 import 'whatwg-fetch'
 
-//
+// 解析返回值
 const _parseResponse = (response) => response.json()
 
+//  设置头部信息
 const headers = {
     'X-Requested-With': 'XMLHttpRequest',
     'Content-Type': 'application/json',
-    sun_userid: getCookie('token')
+    'sweet-token': getCookie('sun_userid')
 }
+
+// 解析参数
+
+const parseParams = (method, params) =>{
+    if(!method){
+        return {
+            headers
+        }
+    }
+    return {
+        headers,
+        method: 'POST',
+        body: JSON.stringify(params)
+    }
+}
+
 
 export default {
     // 登录
@@ -32,5 +49,19 @@ export default {
                 })
         })
     },
+    // 获取轮播图列表
+    getCarouselList({limit,currentPage,sort}){debugger
+        return new Promise((resolve, reject) => {
+            const sort = sort ? `&sort=${sort}` :''
+            fetch(`${clientConfig.api}bankend/carousel/list?limit=${limit}&currentPage=${currentPage}${sort}`,parseParams())
+                .then(checkStatus)
+                .then(_parseResponse)
+                .then(data => {
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
+    }
     
 }

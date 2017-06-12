@@ -31,6 +31,13 @@ export default new Router({
           component(resolve){
             require(['@/pages/carousel/bankend-carouselList'],resolve)
           }
+        },
+        {
+          path:'/carousel/add',
+          name:'addCarousel',
+          component(resolve){
+            require(['@/pages/carousel/bankend-addCarousel'],resolve)
+          }
         }
       ]
     }

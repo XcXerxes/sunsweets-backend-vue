@@ -14,7 +14,6 @@
 <script>
     import api from '@/api'
     import md5 from 'blueimp-md5'
-    import router from '@/router'
     import loginForm from '@/components/Login/login-form'
     import {setCookie} from '@/utils'
 
@@ -35,7 +34,7 @@
                         this.$Message.success({
                             content: result.message
                         })
-                        router.push('/home')
+                        this.$router.push('/home')
                     }
                     console.log(result)
                 }).catch(err => {

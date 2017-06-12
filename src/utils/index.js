@@ -5,19 +5,35 @@ const setCookie = (name, value, expiredays) => {
     document.cookie = `${name}=${escape(value)}${expires}`
 }
 
-const getCookie = (name) => {
-    if (document.cookie.length > 0) {
-        let c_start = document.cookie.indexOf(name + "=")
-        if (c_start != -1) {
-            c_start = c_start + name.length + 1
-            let c_end = document.cookie.indexOf(";", c_start)
-            if (c_end == -1) {
-                c_end = document.cookie.length
-            }
-            return unescape(document.cookie.substr(c_start, c_end))
-        }
+const getCookie = (name) => { 
+    var cookies = {}
+    var all = document.cookie
+    if (all === '') {
+        return ''
     }
-    return ''
+    var list = all.split(';')// 分离成数组
+    for (var i = 0; i < list.length; i++) {
+        var item = list[i].trim()
+        var p = item.indexOf('=')
+        var name = item.substr(0, p)
+        var value = item.substr(p + 1)
+        value = decodeURIComponent(value)
+        cookies[name] = value
+    }
+    return cookies[name]
+    /*let c_start = document.cookie.indexOf(name + "=")
+    if (c_start != -1) {
+        c_start = c_start + name.length + 1
+        let c_end = document.cookie.indexOf(";", c_start)
+        if (c_end == -1) {
+            c_end = document.cookie.length
+        }
+        return unescape(document.cookie.substr(c_start, c_end))
+    }
+    if (document.cookie.length > 0) {
+
+    }
+    return ''*/
 }
 
 const deleteCookie = (name) => {

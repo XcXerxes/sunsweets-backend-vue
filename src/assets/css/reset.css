@@ -17,5 +17,5 @@ a{text-decoration:none;}
 header,footer,nav,article,aside,section,figure,figcaption{display:block;}
 .clear{zoom:1;}
 .clear:after{visibility:hidden;display:block;font-size:0;content:"\0020";clear:both;height:0;}
-html, body{height: 100%;overflow-x:hidden;}
+html, body{height: 100%;overflow:hidden;}
 body{font: 12px/1 "microsoft yahei";}
