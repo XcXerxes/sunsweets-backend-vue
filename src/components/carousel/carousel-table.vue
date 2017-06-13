@@ -19,7 +19,7 @@ export default {
                         debugger
                         return h('img', {
                             attrs: {
-                                src: params.row.img.startsWith('http')? params.row.img :`${clientConfig.originalUrl}${params.row.img}`
+                                src: params.row.img.startsWith('http') ? params.row.img : `${clientConfig.originalUrl}${params.row.img}`
                             },
                             style: {
                                 width: '80px',
@@ -62,7 +62,7 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        this.show(params.index)
+                                        this.show(params)
                                     }
                                 }
                             }, '查看'),
@@ -75,7 +75,7 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        this.edit(params.index)
+                                        this.edit(params)
                                     }
                                 }
                             }, '编辑'),
@@ -86,7 +86,7 @@ export default {
                                 },
                                 on: {
                                     click: () => {
-                                        this.remove(params.index)
+                                        this.remove(params.row.id)
                                     }
                                 }
                             }, '删除')
@@ -94,6 +94,29 @@ export default {
                     }
                 }
             ],
+        }
+    },
+    methods: {
+        show(params) {
+            this.$emit('show-carousel', params.row)
+            console.log(params)
+        },
+        remove(id) {
+            this.$Modal.confirm({
+                title: '对话框',
+                content: '<p>确认删除吗?</p>',
+                onOk: () => {
+                    this.$emit('remove-carousel', id)
+                },
+                onCancel: () => {
+
+                }
+            });
+            console.log(id)
+        },
+        edit(params) {
+            this.$emit('edit-carousel', params.row)
+            console.log(params)
         }
     }
 }

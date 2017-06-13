@@ -1,6 +1,6 @@
 <template>
     <section class="sweet-home__content animated bounceInRight">
-        <sweet-bread :breadInfo="breadInfo"></sweet-bread>
+        <sweet-bread title="数据统计"></sweet-bread>
         <div class="sweet-content__module">
              
         </div>
@@ -11,9 +11,7 @@
     export default {
         data(){
             return {
-                breadInfo:{
-                    title:'数据统计'
-                }
+              
             }
         },
         components:{

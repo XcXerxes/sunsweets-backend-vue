@@ -5,16 +5,14 @@ import 'whatwg-fetch'
 // 解析返回值
 const _parseResponse = (response) => response.json()
 
-//  设置头部信息
-const headers = {
-    'X-Requested-With': 'XMLHttpRequest',
-    'Content-Type': 'application/json',
-    'sweet-token': getCookie('sun_userid')
-}
-
 // 解析参数
 
 const parseParams = (method, params) => {
+    const headers = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json',
+        'sweet-token': getCookie('sun_userid')
+    }
     if (!method) {
         return {
             headers
@@ -69,7 +67,46 @@ export default {
             fetch(`${clientConfig.api}bankend/carousel/add`, parseParams('POST', params))
                 .then(checkStatus)
                 .then(_parseResponse)
-                .then(data => {debugger
+                .then(data => {
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
+    },
+    // 删除轮播图
+    removeCarouselById(id) {
+        return new Promise((resolve, reject) => {
+            fetch(`${clientConfig.api}bankend/carousel/delete/${id}`, parseParams())
+                .then(checkStatus)
+                .then(_parseResponse)
+                .then(data => {
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
+    },
+    // 查看轮播图
+    showCarouselById(id) {
+        return new Promise((resolve, reject) => {
+            fetch(`${clientConfig.api}bankend/carousel/view/${id}`, parseParams())
+                .then(checkStatus)
+                .then(_parseResponse)
+                .then(data => {
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
+    },
+    // 修改轮播图
+    updateCarousel(params) {debugger
+        return new Promise((resolve, reject) => {
+            fetch(`${clientConfig.api}bankend/carousel/update`, parseParams('POST',params))
+                .then(checkStatus)
+                .then(_parseResponse)
+                .then(data => {
                     resolve(data)
                 }).catch(err => {
                     reject(err)

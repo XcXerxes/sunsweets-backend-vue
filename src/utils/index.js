@@ -5,7 +5,7 @@ const setCookie = (name, value, expiredays) => {
     document.cookie = `${name}=${escape(value)}${expires}`
 }
 
-const getCookie = (name) => { 
+const getCookie = (name) => { debugger
     var cookies = {}
     var all = document.cookie
     if (all === '') {
@@ -15,11 +15,12 @@ const getCookie = (name) => {
     for (var i = 0; i < list.length; i++) {
         var item = list[i].trim()
         var p = item.indexOf('=')
-        var name = item.substr(0, p)
+        var names = item.substr(0, p)
         var value = item.substr(p + 1)
         value = decodeURIComponent(value)
-        cookies[name] = value
+        cookies[names] = value
     }
+    console.log("cookies[name]============="+cookies[name])
     return cookies[name]
     /*let c_start = document.cookie.indexOf(name + "=")
     if (c_start != -1) {

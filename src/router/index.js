@@ -38,6 +38,20 @@ export default new Router({
           component(resolve){
             require(['@/pages/carousel/bankend-addCarousel'],resolve)
           }
+        },
+        {
+          path:'/carousel/view',
+          name:'viewCarousel',
+          component(resolve){
+            require(['@/pages/carousel/bankend-viewCarousel'],resolve)
+          }
+        },
+        {
+          path:'/carousel/edit',
+          name:'editCarousel',
+          component(resolve){
+            require(['@/pages/carousel/bankend-editCarousel'],resolve)
+          }
         }
       ]
     }

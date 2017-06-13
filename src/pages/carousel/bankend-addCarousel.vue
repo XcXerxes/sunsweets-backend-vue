@@ -1,6 +1,6 @@
 <template>
     <section class="sweet-home__content animated bounceInRight">
-        <sweet-bread :breadInfo="breadInfo"></sweet-bread>
+        <sweet-bread title="添加轮播图片"></sweet-bread>
         <div class="sweet-content__module">
              <carousel-form status="add" v-on:submit="handleSubmit"></carousel-form>
         </div>
@@ -14,9 +14,7 @@
   export default {
     data(){
       return {
-        breadInfo:{
-          title: '添加轮播图片'
-        }
+       
       }
     },
     methods: {
