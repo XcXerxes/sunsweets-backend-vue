@@ -77,7 +77,7 @@ export default {
     // 删除轮播图
     removeCarouselById(id) {
         return new Promise((resolve, reject) => {
-            fetch(`${clientConfig.api}bankend/carousel/delete/${id}`, parseParams())
+            fetch(`${clientConfig.api}bankend/carousel/delete`, parseParams('DELETE',{id}))
                 .then(checkStatus)
                 .then(_parseResponse)
                 .then(data => {
