@@ -2,7 +2,9 @@
     <section class="sweet-home__content animated bounceInRight">
         <sweet-bread title="轮播图列表"></sweet-bread>
         <div class="sweet-content__module">
-            <carousel-table :data="list" v-on:show-carousel="showCarousel" v-on:edit-carousel="editCarousel" v-on:remove-carousel="removeCarousel" />
+            <carousel-table :data="list" v-on:show-carousel="showCarousel" 
+            
+            v-on:edit-carousel="editCarousel" v-on:remove-carousel="removeCarousel" />
             <div class="carousel-pagation">
                 <Button type="primary" @click="addCarousel">添加轮播图</Button>
                 <Page :total="total" :page-size="limit" :current="currentPage" :page-size-opts="[5, 10, 15]" show-elevator show-elevator show-sizer show-total @on-change="pageChange" @on-page-size-change="pageSizeChange" />
