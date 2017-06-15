@@ -27,15 +27,29 @@ export default {
   methods: {
     // 查看
     show(row) {
-
+      debugger
+      this.$router.push({ name: 'viewCate', params: { id: row.id, row } })
     },
     // 编辑
     edit(row) {
-
+      debugger
+      this.$router.push({ name: 'editCate', params: { id: row.id, row } })
     },
     // 删除
     remove(id) {
+      api.deleteCateInfo(id).then(data => {
+        if (data.code == 200) {
+          this.$Message.success(data.message)
+          const { limit, currentPage } = this
+          this.fetchDataList({ limit, currentPage })
+        } else if (data.code == -500) {
 
+        } else {
+          this.$Message.error(data.message)
+        }
+      }).catch(err => {
+        this.$Message.error(err)
+      })
     },
     // 添加
     addCate() {

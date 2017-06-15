@@ -130,42 +130,50 @@ export default {
     },
     // 查看分类信息
     viewCateInfo(id) {
-        fetch(`${clientConfig.api}bankend/sweetCate/view/${id}`, parseParams())
-            .then(_parseResponse)
-            .then(data => {
-                resolve(data)
-            }).catch(err => {
-                reject(err)
-            })
+        return new Promise((resolve, reject) => {
+            fetch(`${clientConfig.api}bankend/sweetCate/view/${id}`, parseParams())
+                .then(_parseResponse)
+                .then(data => {
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
     },
     //添加分类信息
     addCateInfo(params) {
-        fetch(`${clientConfig.api}bankend/sweetCate/add`, parseParams('POST', params))
-            .then(_parseResponse)
-            .then(data => {
-                resolve(data)
-            }).catch(err => {
-                reject(err)
-            })
+        return new Promise((resolve, reject) => {
+            fetch(`${clientConfig.api}bankend/sweetCate/add`, parseParams('POST', params))
+                .then(_parseResponse)
+                .then(data => {
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
     },
     // 修改分类信息
     updateCateInfo(params) {
-        fetch(`${clientConfig.api}bankend/sweetCate/update`, parseParams('POST', params))
-            .then(_parseResponse)
-            .then(data => {
-                resolve(data)
-            }).catch(err => {
-                reject(err)
-            })
+        return new Promise((resolve, reject) => {
+            fetch(`${clientConfig.api}bankend/sweetCate/update`, parseParams('POST', params))
+                .then(_parseResponse)
+                .then(data => {
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
     },
     // 删除分类信息
-    deleteCateInfo(params) {
-        fetch(`${clientConfig.api}bankend/sweetCate/delete`, parseParams('DELETE', { id }))
-            .then(_parseResponse)
-            .then(data => {
-                resolve(data)
-            }).catch(err => {
-                reject(err)
-            })
+    deleteCateInfo(id) {
+        return new Promise((resolve, reject) => {
+            fetch(`${clientConfig.api}bankend/sweetCate/delete`, parseParams('DELETE', { id }))
+                .then(_parseResponse)
+                .then(data => {
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
     }
 }

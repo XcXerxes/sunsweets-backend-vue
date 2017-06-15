@@ -27,6 +27,7 @@ export default {
       api.createCarousel(info).then(result => {
         if (result.code == 200) {
           this.$Message.success(result.message)
+          this.$router.replace('/carousel')
         }
       })
     },

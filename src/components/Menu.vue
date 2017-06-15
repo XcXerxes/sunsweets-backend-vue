@@ -14,7 +14,7 @@
         </Menu-item>
         <Menu-item name="/info">
             <Icon type="ios-paper"></Icon>
-            文章管理
+            甜品管理
         </Menu-item>
         <Menu-item name="/set">
             <Icon type="ios-gear"></Icon>

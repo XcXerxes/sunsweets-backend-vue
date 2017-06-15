@@ -82,7 +82,7 @@ export default new Router({
           }
         },
         {
-          path: '/cate/view',
+          path: '/cate/view/:id',
           name: 'viewCate',
           component(resolve){
             require(['@/pages/cateSweet/bankend-viewCate'],resolve)
@@ -92,13 +92,47 @@ export default new Router({
           }
         },
         {
-          path: '/cate/edit',
-          name: 'editate',
+          path: '/cate/edit/:id',
+          name: 'editCate',
           component(resolve){
             require(['@/pages/cateSweet/bankend-editCate'],resolve)
           },
            beforeEnter(to, from, next){
             urlBeforeEnter(to, from, next, '/cate')
+          }
+        },
+         {
+          path:'/sweet',
+          name:'sweetInfo',
+          component(resolve){
+            require(['@/pages/infoSweet/bankend-infoList'],resolve)
+          }
+        },
+        {
+          path: '/sweet/add',
+          name: 'addSweet',
+          component(resolve){
+            require(['@/pages/infoSweet/bankend-addInfo'],resolve)
+          }
+        },
+        {
+          path: '/sweet/view/:id',
+          name: 'viewSweet',
+          component(resolve){
+            require(['@/pages/infoSweet/bankend-viewInfo'],resolve)
+          },
+           beforeEnter(to, from, next){
+            urlBeforeEnter(to, from, next, '/sweet')
+          }
+        },
+        {
+          path: '/sweet/edit/:id',
+          name: 'editSweet',
+          component(resolve){
+            require(['@/pages/infoSweet/bankend-editInfo'],resolve)
+          },
+           beforeEnter(to, from, next){
+            urlBeforeEnter(to, from, next, '/sweet')
           }
         },
       ]

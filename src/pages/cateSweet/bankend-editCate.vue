@@ -21,7 +21,7 @@ export default {
     handleSubmit(info) {
       api.updateCateInfo(info).then(data => {
         if (data.code == 200) {
-          this.$Message.success('添加成功')
+          this.$Message.success(data.message)
         } else if (data.code == -500) {
 
         } else {

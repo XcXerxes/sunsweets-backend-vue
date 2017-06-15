@@ -10,7 +10,7 @@
     <Form-item label="分类排序：" prop="sweet_order">
       <Row>
         <Col :span="8">
-        <Input placeholder="请输入排序如：1" type="number" v-model="cateForm.sweet_order" />
+        <Input placeholder="请输入排序如：1"  v-model="cateForm.sweet_order" number/>
         </Col>
       </Row>
     </Form-item>
@@ -41,7 +41,7 @@ export default {
           { required: true, message: '请输入名称', trigger: 'blur' }
         ],
         sweet_order: [
-          { required: true, message: '请输入排序', trigger: 'blur' },
+          { required: true,type: 'number', message: '请输入数字', trigger: 'blur' },
         ]
       }
     }
