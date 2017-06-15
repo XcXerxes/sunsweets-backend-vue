@@ -77,7 +77,7 @@ export default {
     // 删除轮播图
     removeCarouselById(id) {
         return new Promise((resolve, reject) => {
-            fetch(`${clientConfig.api}bankend/carousel/delete`, parseParams('DELETE',{id}))
+            fetch(`${clientConfig.api}bankend/carousel/delete`, parseParams('DELETE', { id }))
                 .then(checkStatus)
                 .then(_parseResponse)
                 .then(data => {
@@ -101,9 +101,10 @@ export default {
         })
     },
     // 修改轮播图
-    updateCarousel(params) {debugger
+    updateCarousel(params) {
+        debugger
         return new Promise((resolve, reject) => {
-            fetch(`${clientConfig.api}bankend/carousel/update`, parseParams('POST',params))
+            fetch(`${clientConfig.api}bankend/carousel/update`, parseParams('POST', params))
                 .then(checkStatus)
                 .then(_parseResponse)
                 .then(data => {
@@ -112,6 +113,59 @@ export default {
                     reject(err)
                 })
         })
+    },
+    // 获取分类列表
+    getCateList({ limit, currentPage, sort }) {
+        return new Promise((resolve, reject) => {
+            const sort = sort ? `&sort=${sort}` : ''
+            fetch(`${clientConfig.api}bankend/sweetCate/list?limit=${limit}&currentPage=${currentPage}${sort}`, parseParams())
+                .then(checkStatus)
+                .then(_parseResponse)
+                .then(data => {
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
+    },
+    // 查看分类信息
+    viewCateInfo(id) {
+        fetch(`${clientConfig.api}bankend/sweetCate/view/${id}`, parseParams())
+            .then(_parseResponse)
+            .then(data => {
+                resolve(data)
+            }).catch(err => {
+                reject(err)
+            })
+    },
+    //添加分类信息
+    addCateInfo(params) {
+        fetch(`${clientConfig.api}bankend/sweetCate/add`, parseParams('POST', params))
+            .then(_parseResponse)
+            .then(data => {
+                resolve(data)
+            }).catch(err => {
+                reject(err)
+            })
+    },
+    // 修改分类信息
+    updateCateInfo(params) {
+        fetch(`${clientConfig.api}bankend/sweetCate/update`, parseParams('POST', params))
+            .then(_parseResponse)
+            .then(data => {
+                resolve(data)
+            }).catch(err => {
+                reject(err)
+            })
+    },
+    // 删除分类信息
+    deleteCateInfo(params) {
+        fetch(`${clientConfig.api}bankend/sweetCate/delete`, parseParams('DELETE', { id }))
+            .then(_parseResponse)
+            .then(data => {
+                resolve(data)
+            }).catch(err => {
+                reject(err)
+            })
     }
-
 }

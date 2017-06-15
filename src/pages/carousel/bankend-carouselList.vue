@@ -62,7 +62,6 @@ export default {
         },
         // 获取数据
         fetchDataList({ limit, currentPage, sort }) {
-            debugger
             api.getCarouselList({ limit, currentPage, sort })
                 .then(data => {
                     if (data.code == 200) {

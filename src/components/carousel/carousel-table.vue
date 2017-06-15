@@ -46,7 +46,7 @@ export default {
                     align: 'center',
                     ellipsis: true,
                     render: (h, params) => {
-                        return h('span', moment(params.row.createdAt).format('YYYY-MM-DD HH-mm-ss'))
+                        return h('span', moment(params.row.createdAt).format('YYYY-MM-DD HH:mm:ss'))
                     }
                 },
                 {

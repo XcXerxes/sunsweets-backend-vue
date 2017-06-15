@@ -29,7 +29,7 @@ export default {
           this.$Message.success(result.message)
         }
       })
-    }
+    },
   },
   components: {
     sweetBread,
