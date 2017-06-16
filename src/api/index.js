@@ -175,5 +175,20 @@ export default {
                     reject(err)
                 })
         })
+    },
+    // 获取甜品详情列表
+    getSweetList({currentPage, limit, sort}) {
+        return new Promise((resolve, reject) => {
+            const sort = sort ? `&sort=${sort}` : ''
+            fetch(`${clientConfig.api}bankend/sweetCate/list?limit=${limit}&currentPage=${currentPage}${sort}`, parseParams())
+                .then(checkStatus)
+                .then(_parseResponse)
+                .then(data => {
+                    console.log(data)
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
     }
 }

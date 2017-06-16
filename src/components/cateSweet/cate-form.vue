@@ -7,6 +7,16 @@
         </Col>
       </Row>
     </Form-item>
+    <Form-item label="所属地区：" prop="area">
+      <Row>
+        <Col :span="8">
+        <!--<Cascader :data="regionData" v-model="cateForm.area"></Cascader> -->
+          <Select v-model="cateForm.area">
+            <Option v-for="item in regionData" :value="item.value" :key="item">{{ item.label }}</Option>
+          </Select>
+        </Col>
+      </Row>
+    </Form-item>
     <Form-item label="分类排序：" prop="sweet_order">
       <Row>
         <Col :span="8">
@@ -27,6 +37,7 @@
   </Form>
 </template>
 <script>
+import regionData from '@/utils/regionData'
 
 export default {
   props: ['cateInfo'],
@@ -42,8 +53,16 @@ export default {
         ],
         sweet_order: [
           { required: true,type: 'number', message: '请输入数字', trigger: 'blur' },
+        ],
+        area: [
+          { required: true, message: '请选择地区', trigger: 'blur' },
         ]
       }
+    }
+  },
+  computed: {
+    regionData(){
+      return regionData
     }
   },
   methods: {

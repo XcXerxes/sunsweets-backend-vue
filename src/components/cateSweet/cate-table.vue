@@ -3,6 +3,7 @@
 </template>
 <script>
 import moment from 'moment'
+import regionData from '@/utils/regionData'
 export default {
   props: ['data'],
   data() {
@@ -17,6 +18,14 @@ export default {
           title: '分类排序',
           align: 'center',
           key: 'sweet_order'
+        },
+        {
+          title: '所属地区',
+          align: 'center',
+          render: (h, params) => {
+            var label= regionData.find(item=> item.value == params.row.area).label
+            return h('span',label)
+          }
         },
         {
           title: '创建时间',
@@ -74,6 +83,9 @@ export default {
     }
   },
   methods: {
+    showArea(value){
+      
+    },
     show(row) {
       this.$emit('show', row)
     },
