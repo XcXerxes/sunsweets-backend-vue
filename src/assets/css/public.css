@@ -24,4 +24,5 @@
     padding: 20px;
     border-radius: 4px;
     height: calc(100% - 32px);
+    overflow: auto;
 }

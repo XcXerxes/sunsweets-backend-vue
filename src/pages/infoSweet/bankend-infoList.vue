@@ -14,6 +14,7 @@
 import sweetBread from '@/components/sweet-bread'
 import sweetTable from '@/components/infoSweet/sweet-table'
 import api from '@/api'
+import {mapGetters} from 'vuex'
 
 export default {
     data() {
@@ -38,11 +39,29 @@ export default {
 
         },
         fetchDataList({currentPage, limit, sort}){
+             api.getSweetList({currentPage,limit}).then(data =>{
+                if(data.code == 200){
+                    this.data = data.data
+                    this.total = data.total
+                }else if(data.code == -500){
 
-        }
+                }else {
+                    this.$Message.error(data.message)
+                }
+            }).catch(err => {
+                this.$Message.error(err)
+            })
+        },
+        pageChange(currentPage){
+
+        },
+        pageSizeChange(limit){
+           
+        },
     },
     created(){
-
+        const {currentPage, limit} = this
+        this.fetchDataList({currentPage, limit})
     },
     components: {
         sweetBread,

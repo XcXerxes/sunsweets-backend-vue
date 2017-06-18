@@ -12,7 +12,7 @@
             <Icon type="ios-browsers"></Icon>
             分类管理
         </Menu-item>
-        <Menu-item name="/info">
+        <Menu-item name="/sweet">
             <Icon type="ios-paper"></Icon>
             甜品管理
         </Menu-item>

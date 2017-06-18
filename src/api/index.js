@@ -132,6 +132,7 @@ export default {
     viewCateInfo(id) {
         return new Promise((resolve, reject) => {
             fetch(`${clientConfig.api}bankend/sweetCate/view/${id}`, parseParams())
+                .then(checkStatus)
                 .then(_parseResponse)
                 .then(data => {
                     resolve(data)
@@ -144,6 +145,7 @@ export default {
     addCateInfo(params) {
         return new Promise((resolve, reject) => {
             fetch(`${clientConfig.api}bankend/sweetCate/add`, parseParams('POST', params))
+                .then(checkStatus)
                 .then(_parseResponse)
                 .then(data => {
                     resolve(data)
@@ -156,6 +158,7 @@ export default {
     updateCateInfo(params) {
         return new Promise((resolve, reject) => {
             fetch(`${clientConfig.api}bankend/sweetCate/update`, parseParams('POST', params))
+                .then(checkStatus)
                 .then(_parseResponse)
                 .then(data => {
                     resolve(data)
@@ -168,6 +171,7 @@ export default {
     deleteCateInfo(id) {
         return new Promise((resolve, reject) => {
             fetch(`${clientConfig.api}bankend/sweetCate/delete`, parseParams('DELETE', { id }))
+                .then(checkStatus)
                 .then(_parseResponse)
                 .then(data => {
                     resolve(data)
@@ -176,15 +180,42 @@ export default {
                 })
         })
     },
+    // 获取所有分类
+    getCateAll(){
+        return new Promise((resolve, reject) => {
+            fetch(`${clientConfig.api}bankend/sweetCate/all`, parseParams())
+                .then(checkStatus)
+                .then(_parseResponse)
+                .then(data =>{
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
+    },
+
     // 获取甜品详情列表
     getSweetList({currentPage, limit, sort}) {
         return new Promise((resolve, reject) => {
             const sort = sort ? `&sort=${sort}` : ''
-            fetch(`${clientConfig.api}bankend/sweetCate/list?limit=${limit}&currentPage=${currentPage}${sort}`, parseParams())
+            fetch(`${clientConfig.api}bankend/sweetInfo/list?limit=${limit}&currentPage=${currentPage}${sort}`, parseParams())
                 .then(checkStatus)
                 .then(_parseResponse)
                 .then(data => {
                     console.log(data)
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
+    },
+    // 添加甜品详情
+    addSweetInfo(params){
+        return new Promise((resolve, reject) => {
+            fetch(`${clientConfig.api}bankend/sweetInfo/add`, parseParams('POST', params))
+                .then(checkStatus)
+                .then(_parseResponse)
+                .then(data => {
                     resolve(data)
                 }).catch(err => {
                     reject(err)
