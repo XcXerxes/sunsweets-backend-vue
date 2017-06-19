@@ -14,6 +14,7 @@ export default {
                 {
                     title: '缩略图',
                     key: 'img',
+                    width: '100',
                     align: 'center',
                     render: (h, params) => {
                         debugger
@@ -21,9 +22,12 @@ export default {
                             attrs: {
                                 src: params.row.img.startsWith('http') ? params.row.img : `${clientConfig.originalUrl}${params.row.img}`
                             },
-                            style: {
-                                width: '80px',
-                                height: '48px'
+                            style:{
+                                width:'48px',
+                                height: '48px',
+                                verticalAlign: 'bottom',
+                                borderRadius: '4px',
+                                margin:'2px 0'
                             }
                         });
                     }

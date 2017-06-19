@@ -5,7 +5,7 @@
         </div>
         <div class="sweet-header__userInfo" @click="logout">
             <img class="sweet-header__userImg" :src="require('../assets/images/ai4gjet4l4tjpg.jpg')" />
-            <Icon size="22" color="#c70000" type="power"></Icon>
+            <Icon size="18" color="#c70000" type="power"></Icon>
         </div>
     </header>
 </template>
@@ -23,7 +23,7 @@
     height: 58px;
     line-height: 58px;
     background: #020202;
-    background: #2d8cf0;
+    /*background: #2d8cf0;*/
     display: flex;
 }
 
@@ -42,8 +42,8 @@
 }
 
 .sweet-header__userImg {
-   width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: aliceblue;
     margin-right: 16px;

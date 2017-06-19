@@ -26,7 +26,8 @@ export default {
                                 width:'48px',
                                 height: '48px',
                                 verticalAlign: 'bottom',
-                                borderRadius: '4px'
+                                borderRadius: '4px',
+                                margin:'2px 0'
                             }
                         })
                     }
