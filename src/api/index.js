@@ -181,12 +181,12 @@ export default {
         })
     },
     // 获取所有分类
-    getCateAll(){
+    getCateAll() {
         return new Promise((resolve, reject) => {
             fetch(`${clientConfig.api}bankend/sweetCate/all`, parseParams())
                 .then(checkStatus)
                 .then(_parseResponse)
-                .then(data =>{
+                .then(data => {
                     resolve(data)
                 }).catch(err => {
                     reject(err)
@@ -195,7 +195,7 @@ export default {
     },
 
     // 获取甜品详情列表
-    getSweetList({currentPage, limit, sort}) {
+    getSweetList({ currentPage, limit, sort }) {
         return new Promise((resolve, reject) => {
             const sort = sort ? `&sort=${sort}` : ''
             fetch(`${clientConfig.api}bankend/sweetInfo/list?limit=${limit}&currentPage=${currentPage}${sort}`, parseParams())
@@ -210,9 +210,48 @@ export default {
         })
     },
     // 添加甜品详情
-    addSweetInfo(params){
+    addSweetInfo(params) {
         return new Promise((resolve, reject) => {
             fetch(`${clientConfig.api}bankend/sweetInfo/add`, parseParams('POST', params))
+                .then(checkStatus)
+                .then(_parseResponse)
+                .then(data => {
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
+    },
+    //查询甜品详情
+    getSweetInfo(id) {
+        return new Promise((resolve, reject) => {
+            fetch(`${clientConfig.api}bankend/sweetInfo/view/${id}`, parseParams())
+                .then(checkStatus)
+                .then(_parseResponse)
+                .then(data => {
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
+    },
+    // 修改甜品详情
+    updateSweetInfo(params) {
+        return new Promise((resolve, reject) => {
+            fetch(`${clientConfig.api}bankend/sweetInfo/update`, parseParams('POST', params))
+                .then(checkStatus)
+                .then(_parseResponse)
+                .then(data => {
+                    resolve(data)
+                }).catch(err => {
+                    reject(err)
+                })
+        })
+    },
+    // 删除甜品详情
+    deleteSweetInfo(id) {
+        return new Promise((resolve, reject) => {
+            fetch(`${clientConfig.api}bankend/sweetInfo/delete`, parseParams('DELETE', {id}))
                 .then(checkStatus)
                 .then(_parseResponse)
                 .then(data => {

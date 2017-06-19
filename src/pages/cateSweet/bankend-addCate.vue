@@ -10,6 +10,7 @@
 import sweetBread from '@/components/sweet-bread'
 import cateForm from '@/components/cateSweet/cate-form'
 import api from '@/api'
+import { logoutView } from '@/utils'
 
 export default {
   data() {
@@ -24,7 +25,7 @@ export default {
           this.$Message.success(data.message)
           this.$router.replace('/cate')
         } else if (data.code == -500) {
-
+          logoutView(this)
         } else {
           this.$Message.error(data.message)
         }

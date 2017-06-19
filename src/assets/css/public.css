@@ -9,13 +9,13 @@
 
 .sweet-home__content{
     position: absolute;
-    left: 180px;
-    top:48px;
+    left: 0;
+    top:0;
     right:0;
     bottom:0;
     background: #ececec;
     /*height: 100vh;*/
-    padding: 20px 50px;
+    padding: 20px 40px;
     overflow-x:hidden;
 }
 .sweet-content__module{

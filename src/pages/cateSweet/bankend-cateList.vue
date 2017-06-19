@@ -13,20 +13,21 @@
 <script>
 import sweetBread from '@/components/sweet-bread'
 import cateTable from '@/components/cateSweet/cate-table'
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 import api from '@/api'
+import { logoutView } from '@/utils'
 
 export default {
   data() {
     return {
-     /* data: [],
-      total: 0,*/
+      /* data: [],
+       total: 0,*/
       limit: 5,
       currentPage: 1
     }
   },
   computed: {
-  // 使用对象展开运算符将 getters 混入 computed 对象中
+    // 使用对象展开运算符将 getters 混入 computed 对象中
     ...mapGetters([
       'cateList',
       'total',
@@ -52,7 +53,7 @@ export default {
           const { limit, currentPage } = this
           this.fetchDataList({ limit, currentPage })
         } else if (data.code == -500) {
-
+          logoutView(this)
         } else {
           this.$Message.error(data.message)
         }
@@ -67,7 +68,7 @@ export default {
     // 页码改变
     pageChange(currentPage) {
       this.currentPage = currentPage
-      this.$store.dispatch('fetchCateList',{
+      this.$store.dispatch('fetchCateList', {
         currentPage,
         limit: this.limit
       })
@@ -79,14 +80,14 @@ export default {
     // 条数改变
     pageSizeChange(limit) {
       this.limit = limit
-      this.$store.dispatch('fetchCateList',{
+      this.$store.dispatch('fetchCateList', {
         limit,
         currentPage: this.currentPage,
       })
-     /* this.fetchDataList({
-        limit,
-        currentPage: this.currentPage,
-      })*/
+      /* this.fetchDataList({
+         limit,
+         currentPage: this.currentPage,
+       })*/
     },
     /*// 获取列表
     fetchDataList({ currentPage, limit, sort }) {
@@ -111,10 +112,16 @@ export default {
   },
   created() {
     const { limit, currentPage } = this
-    this.$store.dispatch('fetchCateList',{limit, currentPage}).then(data=>{
-
+    this.$store.dispatch('fetchCateList', { limit, currentPage }).then(data => {
+      if (data) {
+        if (data.code == -500) {
+          logoutView(this)
+        } else {
+          this.$Message.error(data.message)
+        }
+      }
     }).catch(err => {
-
+      this.$Message.error(err)
     })
     /*this.fetchDataList({ limit, currentPage })*/
   },

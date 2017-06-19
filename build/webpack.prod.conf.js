@@ -8,6 +8,8 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var LodashModuleReplacementPlugin  = require('lodash-webpack-plugin')
+
 var HappyPack = require('happypack')
 var happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 
@@ -37,7 +39,13 @@ var webpackConfig = merge(baseWebpackConfig, {
 
       // customize as needed, see Configuration below 
     }),
+    // lodash 按需打包
+    new LodashModuleReplacementPlugin(),
 
+     // moment 
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
+    // 多进程构建
     new HappyPack({
       id: 'js',
       threadPool: happyThreadPool,
@@ -59,8 +67,9 @@ var webpackConfig = merge(baseWebpackConfig, {
       sourceMap: true
     }),
     // extract css into its own file
+    // 打包相对路径
     new ExtractTextPlugin({
-      filename: utils.assetsPath('css/[name].[contenthash].css')
+      filename: '[name].[contenthash].css' /*utils.assetsPath('css/[name].[contenthash].css')*/
     }),
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
@@ -107,7 +116,6 @@ var webpackConfig = merge(baseWebpackConfig, {
       name: 'iview',
       chunks: ['vendor'],
       minChunks: function (module) {
-        console.log(module.resource + '=====================' + path.join(__dirname, '../node_modules'))
         return (
           module.resource &&
           /\.js$/.test(module.resource) &&
@@ -122,7 +130,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     // prevent vendor hash from being updated whenever app bundle is updated
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
-      chunks: ['vendor']
+      chunks: ['vendor','iview']
     }),
     // copy custom static assets
     new CopyWebpackPlugin([

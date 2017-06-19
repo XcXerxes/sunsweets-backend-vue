@@ -35,10 +35,12 @@
                             content: result.message
                         })
                         this.$router.push('/home')
+                    }else {
+                        this.$Message.error(result.message)
                     }
                     console.log(result)
                 }).catch(err => {
-
+                    this.$Message.error(err)
                 })
             }
         },

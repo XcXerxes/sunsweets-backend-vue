@@ -5,7 +5,8 @@ const setCookie = (name, value, expiredays) => {
     document.cookie = `${name}=${escape(value)}${expires}`
 }
 
-const getCookie = (name) => { debugger
+const getCookie = (name) => {
+    debugger
     var cookies = {}
     var all = document.cookie
     if (all === '') {
@@ -20,7 +21,7 @@ const getCookie = (name) => { debugger
         value = decodeURIComponent(value)
         cookies[names] = value
     }
-    console.log("cookies[name]============="+cookies[name])
+    console.log("cookies[name]=============" + cookies[name])
     return cookies[name]
     /*let c_start = document.cookie.indexOf(name + "=")
     if (c_start != -1) {
@@ -59,11 +60,22 @@ const checkStatus = (response) => {
     }
 }
 
+const logoutView = (self) => {
+    self.$Message.error({
+        content: '登录已超时，请重新登录',
+        onClose: () => {
+            self.$router.replace('/')
+        }
+    })
+    clearCookie()
+}
+
 
 export {
     getCookie,
     setCookie,
     deleteCookie,
     clearCookie,
-    checkStatus
+    checkStatus,
+    logoutView
 }

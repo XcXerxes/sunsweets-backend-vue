@@ -5,6 +5,8 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+var LodashModuleReplacementPlugin  = require('lodash-webpack-plugin')
+
 
 var HappyPack = require('happypack')
 var happyThreadPool = HappyPack.ThreadPool({ size: 5 });
@@ -45,6 +47,12 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': config.dev.env
     }),
+    // lodash 按需打包
+    new LodashModuleReplacementPlugin(),
+
+    // moment 
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),

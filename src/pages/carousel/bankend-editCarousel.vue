@@ -10,6 +10,8 @@
 import sweetBread from '@/components/sweet-bread'
 import carouselForm from '@/components/carousel/carousel-form'
 import api from '@/api'
+import { logoutView } from '@/utils'
+
 export default {
     data() {
         return {
@@ -28,11 +30,13 @@ export default {
                 if (data.code === 200) {
                     this.$Message.success(data.message)
                     this.$router.replace('/carousel')
-                } else if (data.code == -200) {
-                    this.$Message.error(data.message)
+                } else if (data.code == -500) {
+                    logoutView(this)
                 } else {
                     this.$Message.error(data.message)
                 }
+            }).catch(err => {
+                this.$Message.error(err)
             })
         }
     },

@@ -15,6 +15,7 @@ import sweetBread from '@/components/sweet-bread'
 import sweetTable from '@/components/infoSweet/sweet-table'
 import api from '@/api'
 import {mapGetters} from 'vuex'
+import {logoutView} from '@/utils'
 
 export default {
     data() {
@@ -36,7 +37,17 @@ export default {
             this.$router.push({name:'editSweet',params: {id:row.id, row}})
         },
         remove(id){
-
+            api.deleteSweetInfo(id).then(data => {
+                if(data.code == 200){
+                    this.$Message.success(data.message)
+                    const {currentPage, limit} = this
+                    this.fetchDataList({currentPage, limit})
+                }else if(data.code == -500){
+                    logoutView(this)
+                }else {
+                    this.$Message.error(data.message)
+                }
+            })
         },
         fetchDataList({currentPage, limit, sort}){
              api.getSweetList({currentPage,limit}).then(data =>{
@@ -44,7 +55,7 @@ export default {
                     this.data = data.data
                     this.total = data.total
                 }else if(data.code == -500){
-
+                    logoutView(this)
                 }else {
                     this.$Message.error(data.message)
                 }
@@ -53,10 +64,18 @@ export default {
             })
         },
         pageChange(currentPage){
-
+            this.currentPage = currentPage
+            this.fetchDataList({
+                currentPage,
+                limit: this.limit
+            })
         },
         pageSizeChange(limit){
-           
+           this.limit = limit
+           this.fetchDataList({
+               limit,
+               currentPage: this.currentPage
+           })
         },
     },
     created(){

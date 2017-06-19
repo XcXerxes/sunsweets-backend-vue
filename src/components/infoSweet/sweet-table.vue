@@ -5,6 +5,9 @@
 
 <script>
 import clientConfig from '@/api/client-config'
+import regionData from '@/utils/regionData' 
+import _ from 'lodash'
+
 export default {
     props: ['data'],
     data() {
@@ -13,10 +16,17 @@ export default {
                 {
                     title: '缩略图',
                     align: 'center',
+                    width:'100',
                     render: (h, params) => {
-                        h('img', {
+                        return h('img', {
                             attrs: {
                                 src: params.row.thumb.startsWith('http') ? params.row.thumb : `${clientConfig.originalUrl}${params.row.thumb}`
+                            },
+                            style:{
+                                width:'48px',
+                                height: '48px',
+                                verticalAlign: 'bottom',
+                                borderRadius: '4px'
                             }
                         })
                     }
@@ -30,7 +40,10 @@ export default {
                 {
                     title: '分类',
                     align: 'center',
-                    key: 'category'
+                    ellipsis: true,
+                    render: (h, params) =>{
+                        return h('span', params.row.sweet_cate.title)
+                    }
                 },
                 {
                     title: '描述',
@@ -41,7 +54,9 @@ export default {
                 {
                     title: '地区',
                     align: 'center',
-                    key: 'area'
+                    render: (h, params) => {
+                        return h('span', this.transformIdToLabel(params.row.area))
+                    }
                 },
                 {
                     title: '管理',
@@ -91,6 +106,14 @@ export default {
         }
     },
     methods: {
+        // 根据地区的id 返回值
+        transformIdToLabel(id){
+            const obj = _.find(regionData, (item) => item.value == id)
+            if(obj){
+                return obj.label
+            }
+            return id
+        },
         show(row) {
             this.$emit('show', row)
         },
@@ -105,7 +128,7 @@ export default {
                     this.$emit('remove', row.id)
                 },
                 onCancel: () => {
-
+                    
                 }
             });
         }

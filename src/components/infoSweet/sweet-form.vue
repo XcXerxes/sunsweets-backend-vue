@@ -76,9 +76,10 @@ import regionData from '@/utils/regionData'
 import clientConfig from '@/api/client-config'
 import E from 'wangeditor'
 import { getCookie } from '@/utils'
+import _ from 'lodash'
 
 export default {
-    props: ['allCate'],
+    props: ['allCate', 'sweetInfo'],
     data() {
         return {
             sweetForm: {
@@ -156,16 +157,20 @@ export default {
             this.$emit('cancel')
         }
     },
-    mounted() {
-        const editor = new E('#editorElem')
+    mounted() {debugger
+        let editor = new E('#editorElem')
         editor.customConfig.uploadImgShowBase64 = true
-        editor.customConfig.onchange = (html) => {debugger
+        editor.customConfig.onchange = (html) => {
             this.sweetForm.desc = html
         }
         editor.create()
+        editor.txt.html(this.sweetForm.desc||'')
     },
     created() {
         console.log(this.allCate)
+        if(this.sweetInfo){debugger
+            this.sweetForm = Object.assign({}, this.sweetInfo)
+        }
     }
 }
 </script>

@@ -11,6 +11,7 @@ import sweetBread from '@/components/sweet-bread'
 import sweetForm from '@/components/infoSweet/sweet-form'
 import api from '@/api'
 import {mapGetters} from 'vuex'
+import {logoutView} from '@/utils'
 
 export default {
   data() {
@@ -36,7 +37,7 @@ export default {
           this.$Message.success(data.message)
           this.$router.replace('/sweet')
         }else if(data.code == -500){
-
+          logoutView(this)
         }else {
           this.$Message.error(data.message)
         }
@@ -61,7 +62,17 @@ export default {
     }
   },
   created(){
-    this.$store.dispatch('fetchAllCate')
+    this.$store.dispatch('fetchAllCate').then(data => {
+      if(data){
+        if(data.code == -500){
+          logoutView(this)
+        }else {
+          this.$Message.error(data.message)
+        }
+      }
+    }).catch(err => {
+      this.$Message.error(err)
+    })
   },
   components: {
     sweetBread,
