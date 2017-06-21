@@ -47,7 +47,7 @@ export default {
     },
     // 获取轮播图列表
     getCarouselList({ limit, currentPage, sort }) {
-        sort = `&sort=${sort}` || ''
+        sort = sort ? `&sort=${sort}` : ''
         return fetch(`${clientConfig.api}bankend/carousel/list?limit=${limit}&currentPage=${currentPage}${sort}`, parseParams())
             .then(checkStatus)
             .then(_parseResponse)

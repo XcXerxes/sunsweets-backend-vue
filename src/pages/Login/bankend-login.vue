@@ -29,8 +29,8 @@
                     password: md5(loginInfo.password)
                 })
                 api.login(loginInfo).then(result => {
-                    if(result.code == 200){
-                        setCookie('sun_userid', result.data, 1/24*3)
+                    if(result.code == 200){debugger
+                        setCookie('sun_userid', result.data/*, 1/24*3*/)
                         this.$Message.success({
                             content: result.message
                         })
