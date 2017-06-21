@@ -62,15 +62,16 @@
 <style lang="" scoped>
     .container {
         height:100%;
-        display:flex;
-        justify-content: center;
+        /*display:flex;
+        justify-content: center;*/
         position:relative;
         background:url('../../assets/images/cheesecake-743754_1920.jpg') no-repeat;
     }
     .mask{
         width:100%;
         height:100%;
-        background-color: rgba(176, 216, 179, 0.3)
+        background-color: rgba(176, 216, 179, 0.3);
+        position: absolute;
     }
 
     .login {
@@ -79,6 +80,8 @@
         box-shadow: 0 0 2px #e2e2e2;
         width:460px;
         padding: 20px;
+        left:50%;
+        margin-left: -240px;
         background-color: #f9f9f9;
         border-radius: 5px;
     }
