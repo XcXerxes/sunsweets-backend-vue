@@ -2,7 +2,8 @@ const setCookie = (name, value, expiredays) => {
     var exdate = new Date()
     exdate.setDate(exdate.getDate() + expiredays)
     const expires = !expiredays ? '' : `;expires=${exdate.toGMTString()}`
-    document.cookie = `${name}=${escape(value)}${expires}`
+    document.cookie = (name + '=' + escape(value) + expires)
+    //document.cookie = `${name}=${escape(value)}${expires}`
 }
 
 const getCookie = (name) => {
