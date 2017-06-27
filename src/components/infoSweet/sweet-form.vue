@@ -19,10 +19,10 @@
                 </Col>
             </Row>
         </Form-item>
-        <Form-item label="分类：" prop="sweet_cate_id">
+        <Form-item label="分类：" prop="sweetCateId">
             <Row>
                 <Col :span="8">
-                <Select v-model="sweetForm.sweet_cate_id">
+                <Select v-model="sweetForm.sweetCateId">
                     <Option v-for="item in allCate" :value="item.id" :key="item">{{ item.title }}</Option>
                 </Select>
                 </Col>
@@ -86,7 +86,7 @@ export default {
                 title: '',
                 thumb: '',
                 caption: '',
-                sweet_cate_id: '',
+                sweetCateId: '',
                 area: '',
                 diff: 0,
                 desc: ''
@@ -101,7 +101,7 @@ export default {
                 caption: [
                     { required: true, message: '请输入描述', trigger: 'blur' }
                 ],
-                sweet_cate_id: [
+                sweetCateId: [
                     { required: true, message: '请选择分类', trigger: 'blur' }
                 ],
                 area: [
